@@ -1,0 +1,73 @@
+language: java
+before_install:
+  - sudo apt-get -y install jq
+  - java -Xmx32m -version
+before_script:
+  - ls -lah
+  - google-chrome-stable --version
+addons:
+  chrome: stable
+  apt:
+    packages:
+      - openjdk-8-jdk
+
+env:
+  global:
+    - CHROME_ARGS="--headless"
+    - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+    - PATH="$JAVA_HOME/bin:$PATH"
+    - CHROME_PROPERTIES="chrome.properties"
+    - WITH_DRIVER_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES""
+    - TEST_USER_LOGIN="test-user"
+    - TEST_USER_PASSWORD="Fqvq1s0S"
+    - SAUCE_LABS_URL=""
+    - WITH_TESTS_PARAMS="-Dreport.portal.user=$TEST_USER_LOGIN -Dreport.portal.password=$TEST_USER_PASSWORD"
+    - WITH_SAUCE_LABS_URL="-Dsauce.labs.url=$SAUCE_LABS_URL"
+
+
+stages:
+  - prepare
+  - compile
+  - test
+  - reports
+
+jobs:
+  include:
+    - stage: prepare
+      name: Welcome to jdi light demo
+      script:
+        - echo ------------------- WELCOME TO JDI LIGHT DEMO ----------------------
+        - mvn --version
+
+    - stage: compile
+      name: Compile jdi light demo code
+      script:
+        - mvn install -DskipTests
+
+    - stage: test
+      name: Run tests
+      script:
+        - mvn -ntp install -DskipTests
+        - echo arguments=$CHROME_ARGS > "./src/test/resources/$CHROME_PROPERTIES"
+        - mvn verify $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS $WITH_SAUCE_LABS_URL
+
+    - stage: reports
+      name: Deploy allure reports to netlify
+      script:
+        - npm install -g allure-commandline
+        - npm install -g netlify-cli
+        - allure --version
+        - source reports.sh
+        - deployAllureResults
+after_failure:
+  - echo "Build was failed"
+after_success:
+  - echo "Build was successful"
+after_script:
+  - source reports.sh
+  - grubAllureResults
+  - du -d 1 -h ./
+  - ls -la
+# extra time during long builds
+install:
+  - travis_wait
