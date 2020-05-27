@@ -41,8 +41,8 @@ function collectRelevantComments(){
 function sendComment() {
     body="$1"
     url="https://api.github.com/repos/${TRAVIS_REPO_SLUG}/issues/${TRAVIS_PULL_REQUEST}/comments";
-    echo Body: ${body}
-    echo URL: ${url}
+    echo Body: "${body}"
+    echo URL: "${url}"
     curl -H "Authorization: token ${GIT_COMMENT_USER}" \
          -X POST "${url}" \
          -d "{
@@ -92,7 +92,7 @@ function grubAllureResults() {
         echo RESULT: ${result}
         archiveFile="$(archive "${result}")"
         echo ARCHIVE: "${archiveFile}"
-        ls -lah *.tar.gz
+        ls -lah ./*.tar.gz
         uploadedTo="$(uploadFile "${archiveFile}")"
         echo UPLOAD TO KEY: "${uploadedTo}"
         sendComment "$(aboutTransfer "${uploadedTo}")"
@@ -120,7 +120,7 @@ function deployAllureResults() {
     echo "LOG1"
     url="$(deployToNetlify "allure-report")"
     echo "LOG2"
-    sendComment "$(aboutNetlify ${url})"
+    sendComment "$(aboutNetlify "${url}")"
 }
 
 function downloadAllureResults() {
@@ -147,7 +147,7 @@ function downloadAllureResults() {
 }
 
 function extractAllureResults() {
-    for archiveFile in $(ls -1 *.tar.gz)
+    for archiveFile in $(ls -1 ./*.tar.gz)
     do
         extractArchive "${archiveFile}"
     done
@@ -168,8 +168,8 @@ function generateAllureReports() {
         echo "Failed inside generateAllureReports()"
         exitWithError
     fi
-    echo ${reportDirList}
-    allure generate --clean ${reportDirList}
+    echo "${reportDirList}"
+    allure generate --clean "${reportDirList}"
 }
 
 function deployToNetlify() {
