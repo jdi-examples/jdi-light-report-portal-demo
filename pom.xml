@@ -76,18 +76,6 @@
                             <value>io.qameta.allure.testng.AllureTestNg</value>
                         </property>
                     </properties>
-
-                    <systemProperties>
-                        <property>
-                            <name>report.portal.user</name>
-                            <value>default</value>
-                        </property>
-                        <property>
-                            <name>report.portal.password</name>
-                            <value>1q2w3e</value>
-                        </property>
-                    </systemProperties>
-
                 </configuration>
                 <dependencies>
                     <dependency>
