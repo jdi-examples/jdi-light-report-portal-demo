@@ -52,7 +52,7 @@ function sendComment() {
 
 function archive() {
     directory="$1"
-    archiveName="$(echo "${directory}"| awk -F"/" '{print $1}')".tar.gz
+    archiveName=jdi-light-demo-platform-report.tar.gz
     tar -czf "${archiveName}" "${directory}" > /dev/null
     echo "${archiveName}" #return
 }
@@ -92,7 +92,7 @@ function grubAllureResults() {
         echo RESULT: ${result}
         archiveFile="$(archive "${result}")"
         echo ARCHIVE: "${archiveFile}"
-        ls -lah ./*.tar.gz
+        ls -lah ./"${archiveFile}"
         uploadedTo="$(uploadFile "${archiveFile}")"
         echo UPLOAD TO KEY: "${uploadedTo}"
         sendComment "$(aboutTransfer "${uploadedTo}")"
