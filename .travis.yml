@@ -20,9 +20,9 @@ env:
     - WITH_DRIVER_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES""
     - TEST_USER_LOGIN="test-user"
     - TEST_USER_PASSWORD="Fqvq1s0S"
-    - SAUCE_LABS_URL=""
+    - WEBDRIVER_REMOTE_URL=""
     - WITH_TESTS_PARAMS="-Dreport.portal.user=$TEST_USER_LOGIN -Dreport.portal.password=$TEST_USER_PASSWORD"
-    - WITH_SAUCE_LABS_URL="-Dsauce.labs.url=$SAUCE_LABS_URL"
+    - WITH_WEBDRIVER_REMOTE_URL="-Dwebdriver.remote.url=$WEBDRIVER_REMOTE_URL"
 
 
 stages:
@@ -49,7 +49,7 @@ jobs:
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS $WITH_SAUCE_LABS_URL
+        - mvn verify $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS $WITH_WEBDRIVER_REMOTE_URL
 
     - stage: reports
       name: Deploy allure reports to netlify
