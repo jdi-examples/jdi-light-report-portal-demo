@@ -12,7 +12,7 @@ import static java.lang.System.getProperty;
 
 public class TestsInit {
 
-    static void setRemoteWebDriverIfRequired() {
+    private static void setRemoteWebDriverIfRequired() {
         String remoteUrl = getProperty("webdriver.remote.url");
         if (remoteUrl != null) {
             JDISettings.DRIVER.remoteUrl = remoteUrl;
@@ -28,7 +28,7 @@ public class TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
-        setRemoteWebDriverIfRequired();
+
         openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
