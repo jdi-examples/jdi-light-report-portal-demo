@@ -10,9 +10,9 @@ import static com.epam.jdi.light.elements.composite.WebPage.openSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.System.getProperty;
 
-public class TestsInit {
+public interface TestsInit {
 
-    private static void setRemoteWebDriverIfRequired() {
+    static void setRemoteWebDriverIfRequired() {
         String remoteUrl = getProperty("webdriver.remote.url");
         if (remoteUrl != null) {
             JDISettings.DRIVER.remoteUrl = remoteUrl;

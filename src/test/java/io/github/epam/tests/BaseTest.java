@@ -10,7 +10,7 @@ import static io.github.com.pages.HomePage.userName;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.UserUtils.DEFAULT_USER;
 
-public class BaseTest extends TestsInit {
+public class BaseTest implements TestsInit {
 
     @BeforeMethod
     public void before() {
