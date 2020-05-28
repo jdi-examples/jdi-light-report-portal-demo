@@ -10,10 +10,9 @@ import static com.epam.jdi.light.elements.composite.WebPage.openSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.System.getProperty;
 
-public interface TestsInit {
+public class TestsInit {
 
-    @BeforeSuite(alwaysRun = true)
-    static void setUp() {
+    static void setRemoteWebDriverIfRequired() {
         String remoteUrl = getProperty("webdriver.remote.url");
         if (remoteUrl != null) {
             JDISettings.DRIVER.remoteUrl = remoteUrl;
@@ -25,6 +24,11 @@ public interface TestsInit {
                 JDISettings.DRIVER.capabilities.chrome.put("build", "build: " + buildTag);
             }
         }
+    }
+
+    @BeforeSuite(alwaysRun = true)
+    static void setUp() {
+        setRemoteWebDriverIfRequired();
         openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
