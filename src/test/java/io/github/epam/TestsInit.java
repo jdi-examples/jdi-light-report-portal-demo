@@ -28,7 +28,7 @@ public class TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
-
+        setRemoteWebDriverIfRequired();
         openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
