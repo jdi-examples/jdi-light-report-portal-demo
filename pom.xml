@@ -113,9 +113,4 @@
             </resource>
         </resources>
     </build>
-
 </project>
-
-        <!--
-        mvn clean package -Dreport.portal.user=test-user -Dreport.portal.password=Fqvq1s0S
-        -->

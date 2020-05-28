@@ -8,19 +8,27 @@ import org.testng.annotations.BeforeSuite;
 
 import static com.epam.jdi.light.elements.composite.WebPage.openSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.System.getProperty;
 
 public interface TestsInit {
 
-    @BeforeSuite(alwaysRun = true)
-    static void setUp() {
-        String remoteUrl = System.getProperty("webdriver.remote.url");
+    static void setRemoteWebDriverIfRequired() {
+        String remoteUrl = getProperty("webdriver.remote.url");
         if (remoteUrl != null) {
             JDISettings.DRIVER.remoteUrl = remoteUrl;
             JDISettings.DRIVER.capabilities.chrome.put("w3c", "true");
             JDISettings.DRIVER.capabilities.chrome.put("platformName", "Linux");
             JDISettings.DRIVER.capabilities.chrome.put("browserVersion", "latest");
-            // JDISettings.DRIVER.capabilities.chrome.put("sauce:options", sauceOptions);
+            String buildTag = getProperty("build.tag");
+            if (buildTag != null) {
+                JDISettings.DRIVER.capabilities.chrome.put("build", "build: " + buildTag);
+            }
         }
+    }
+
+    @BeforeSuite(alwaysRun = true)
+    static void setUp() {
+        setRemoteWebDriverIfRequired();
         openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
