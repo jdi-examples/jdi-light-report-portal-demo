@@ -1,26 +1,15 @@
 package io.github.epam.tests;
 
 import io.github.epam.TestsInit;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
 
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.pages.HomePage.logoButton;
-import static io.github.com.pages.HomePage.userName;
+import static io.github.com.StaticSite.dashboardPage;
 import static io.github.epam.states.States.shouldBeLoggedIn;
-import static io.github.epam.test.data.UserUtils.DEFAULT_USER;
 
-public class BaseTest implements TestsInit {
-
-    @BeforeMethod
+public abstract class BaseTest implements TestsInit {
+    @BeforeTest(alwaysRun = true)
     public void before() {
         shouldBeLoggedIn();
-        homePage.shouldBeOpened();
-    }
-
-    @Test
-    public void baseTest() {
-        logoButton.is().displayed();
-        userName.is().equals(DEFAULT_USER.name);
+        dashboardPage.shouldBeOpened();
     }
 }
