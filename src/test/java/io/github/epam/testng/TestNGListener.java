@@ -18,6 +18,9 @@ import java.util.Date;
 import static com.epam.jdi.light.driver.ScreenshotMaker.takeScreen;
 import static com.epam.jdi.light.settings.WebSettings.TEST_NAME;
 import static com.epam.jdi.light.settings.WebSettings.logger;
+import static io.github.epam.testng.TestNGResults.FAILED;
+import static io.github.epam.testng.TestNGResults.PASSED;
+import static io.github.epam.testng.TestNGResults.SKIPPED;
 import static java.lang.System.currentTimeMillis;
 
 public class TestNGListener implements IInvokedMethodListener {
@@ -41,7 +44,7 @@ public class TestNGListener implements IInvokedMethodListener {
             String result = getTestResult(r);
             logger.step("=== Test '%s' %s [%s] ===", TEST_NAME.get(), result,
                         new SimpleDateFormat("mm:ss.SS").format(new Date(currentTimeMillis() - start.get())));
-            if (result.equals("FAILED")) {
+            if (result.equals(FAILED.getName())) {
                 takeScreen();
                 logger.step("ERROR: " + r.getThrowable().getMessage());
             }
@@ -52,11 +55,11 @@ public class TestNGListener implements IInvokedMethodListener {
     private String getTestResult(final ITestResult result) {
         switch (result.getStatus()) {
             case ITestResult.SUCCESS:
-                return "PASSED";
+                return PASSED.getName();
             case ITestResult.SKIP:
-                return "SKIPPED";
+                return SKIPPED.getName();
             default:
-                return "FAILED";
+                return FAILED.getName();
         }
     }
 }

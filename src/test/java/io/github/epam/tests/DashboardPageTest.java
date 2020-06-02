@@ -1,7 +1,6 @@
 package io.github.epam.tests;
 
 import io.github.com.composites.AddDashboardDialog;
-import io.github.com.entities.SideBarMenu;
 import org.testng.annotations.Test;
 
 import java.util.Random;
@@ -12,6 +11,7 @@ import static io.github.com.composites.AddDashboardDialog.cancelAdd;
 import static io.github.com.composites.AddDashboardDialog.description;
 import static io.github.com.composites.DeleteDashboardDialog.confirmDelete;
 import static io.github.com.composites.ItemDashboardView.deleteDashboard;
+import static io.github.com.entities.SideBarMenu.DASHBOARD;
 import static io.github.com.pages.DashboardPage.addDashboardDialog;
 import static io.github.com.pages.DashboardPage.addNewDashboardButton;
 import static io.github.com.pages.DashboardPage.dashboardTitle;
@@ -21,7 +21,7 @@ public class DashboardPageTest extends TestsBase {
     @Test
     public void verifyThatUserCanOpenAndCancelNewDashboardDialog() {
         String expectedModalDialogTitle = "Add New Dashboard";
-        sideBarMenu.select(SideBarMenu.DASHBOARD.getName());
+        sideBarMenu.select(DASHBOARD.getName());
         addNewDashboardButton.click();
         addDashboardTitle.assertThat().text(expectedModalDialogTitle.toUpperCase());
         cancelAdd.click();
@@ -32,7 +32,7 @@ public class DashboardPageTest extends TestsBase {
     public void verifyThatUserAddNewDashboard() {
         String newDashboardName = new Random().nextInt(1000) + "_test_dashboard";
         String newDashboardDescription = newDashboardName + "_description";
-        sideBarMenu.select(SideBarMenu.DASHBOARD.getName());
+        sideBarMenu.select(DASHBOARD.getName());
         addNewDashboardButton.click();
         AddDashboardDialog.newDashboardName.setValue(newDashboardName);
         description.setValue(newDashboardDescription);
