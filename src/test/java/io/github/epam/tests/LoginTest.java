@@ -6,7 +6,7 @@ import static io.github.com.composites.Header.menuIcon;
 import static io.github.com.composites.Header.userName;
 import static io.github.epam.test.data.UserUtils.DEFAULT_USER;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends TestsBase {
     @Test
     public void verifyThatUserCanLogonAsDefaultUser() {
         menuIcon.is().displayed();

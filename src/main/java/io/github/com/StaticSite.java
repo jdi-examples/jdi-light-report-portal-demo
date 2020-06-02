@@ -11,9 +11,9 @@ public class StaticSite {
     @Url("/#login")
     public static LoginPage loginPage;
 
-    @Url("/#default_personal/dashboard")
+    @Url("/#test-user_personal/dashboard")
     public static DashboardPage dashboardPage;
 
-    @Url("/#default_personal/launches/all")
+    @Url("/#test-user_personal/launches/all")
     public static LaunchesPage launchesPage;
 }
