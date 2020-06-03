@@ -5,9 +5,9 @@ import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Text;
 
-public class DeleteDashboardDialog extends Section {
+public class ModalDeleteDialog extends Section {
     @UI("[class*=modal-title]")
-    public static Text deleteDashboardTitle;
+    public static Text modalDeleteTitle;
 
     @UI("button[class*=color-tomato]")
     public static Button confirmDelete;

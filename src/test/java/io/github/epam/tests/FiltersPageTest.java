@@ -11,7 +11,7 @@ import static io.github.com.pages.FiltersPage.noFiltersBlock;
 import static io.github.com.pages.HomePage.sideBarMenu;
 
 public class FiltersPageTest extends TestsBase {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void navigateToFiltersDashboard() {
         sideBarMenu.select(FILTERS.getName());
     }
@@ -19,18 +19,15 @@ public class FiltersPageTest extends TestsBase {
     @Test
     public void verifyThatUserCannotSearchByFilterNameIfNoFilters() {
         if (noFiltersBlock.isHidden()) {
-            filterSearchField.is().disabled();
-        } else {
             filterSearchField.is().enabled();
+        } else {
+            filterSearchField.is().disabled();
         }
     }
 
     @Test
-    public void verifyThatUserCanProceedToAddNewFilterDashboardUsingBothButtons() {
-        addFilterButtons.get(1).click();
-        launchesPage.shouldBeOpened();
-        sideBarMenu.select(FILTERS.getName());
-        addFilterButtons.get(2).click();
+    public void verifyThatUserCanProceedToAddNewFilterUsingButton() {
+        addFilterButtons.get("Add Filter").click();
         launchesPage.shouldBeOpened();
     }
 }

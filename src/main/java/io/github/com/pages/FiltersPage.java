@@ -15,8 +15,8 @@ public class FiltersPage extends HomePage {
     @UI("[class*=noFiltersBlock]")
     public static Section noFiltersBlock;
 
-    @UI("[class*=ghostButton__color-topaz]")
-    public static List<Button> addFilterButtons;
+    @UI("[class*=ghostButton__color-topaz] ['%s']")
+    public static WebList addFilterButtons;
 
     @UI("[class*=filterName__bold]")
     public static WebList filterTitle;

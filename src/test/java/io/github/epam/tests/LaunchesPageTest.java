@@ -5,28 +5,29 @@ import org.testng.annotations.Test;
 
 import java.util.Random;
 
-import static io.github.com.composites.AddFilterDialog.addFilter;
-import static io.github.com.composites.AddFilterDialog.addFilterTitle;
-import static io.github.com.composites.AddFilterDialog.cancelAddFilter;
-import static io.github.com.composites.AddFilterDialog.newFilterName;
-import static io.github.com.composites.AddFilterView.moreDropdown;
+import static io.github.com.composites.AddFilterView.moreEntitiesSelector;
 import static io.github.com.composites.AddFilterView.saveFilterButton;
 import static io.github.com.composites.ConditionalEntities.filterInputField;
-import static io.github.com.composites.DeleteFilterDialog.confirmDelete;
+import static io.github.com.composites.ModalAddDialog.modalAddButton;
+import static io.github.com.composites.ModalAddDialog.modalAddTitle;
+import static io.github.com.composites.ModalAddDialog.modalCancelButton;
+import static io.github.com.composites.ModalAddDialog.modalNewName;
+import static io.github.com.composites.ModalDeleteDialog.confirmDelete;
 import static io.github.com.entities.AddFilterMenu.LAUNCH_NUMBER;
 import static io.github.com.entities.LaunchesFilter.ALL_LAUNCHES;
 import static io.github.com.entities.LaunchesFilter.LATEST_LAUNCHES;
 import static io.github.com.entities.SideBarMenu.FILTERS;
 import static io.github.com.entities.SideBarMenu.LAUNCHES;
-import static io.github.com.pages.DashboardPage.addFilterDialog;
 import static io.github.com.pages.FiltersPage.deleteFilter;
 import static io.github.com.pages.FiltersPage.filterTitle;
+import static io.github.com.pages.HomePage.modalAddDialog;
+import static io.github.com.pages.HomePage.modalDeleteDialog;
 import static io.github.com.pages.HomePage.sideBarMenu;
 import static io.github.com.pages.LaunchesPage.addFilterButton;
 import static io.github.com.pages.LaunchesPage.launchesDropdown;
 
 public class LaunchesPageTest extends TestsBase {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void navigateToLaunchesDashboard() {
         sideBarMenu.select(LAUNCHES.getName());
     }
@@ -51,23 +52,24 @@ public class LaunchesPageTest extends TestsBase {
         addFilterButton.click();
         filterInputField.get(1).sendKeys("test");
         saveFilterButton.click();
-        addFilterTitle.assertThat().text(expectedModalDialogTitle.toUpperCase());
-        cancelAddFilter.click();
-        addFilterDialog.isNotVisible();
+        modalAddTitle.assertThat().text(expectedModalDialogTitle.toUpperCase());
+        modalCancelButton.click();
+        modalAddDialog.isNotVisible();
     }
     @Test
     public void verifyThatUserCanAddNewFilter() {
         String expectedFilterName = new Random().nextInt(1000) + "_test_filter";
         addFilterButton.click();
         filterInputField.get(1).sendKeys("test");
-        moreDropdown.select(LAUNCH_NUMBER.getName());
+        moreEntitiesSelector.select(LAUNCH_NUMBER.getName());
         filterInputField.get(2).sendKeys("1");
         saveFilterButton.click();
-        newFilterName.setValue(expectedFilterName);
-        addFilter.click();
+        modalNewName.setValue(expectedFilterName);
+        modalAddButton.click();
         sideBarMenu.select(FILTERS.getName());
         filterTitle.getUIElement(expectedFilterName).assertThat().text(expectedFilterName);
         deleteFilter.get(1).click();
+        modalDeleteDialog.shouldBe().displayed();
         confirmDelete.click();
     }
 }
