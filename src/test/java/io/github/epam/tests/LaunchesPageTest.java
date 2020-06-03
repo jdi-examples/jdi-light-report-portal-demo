@@ -1,8 +1,11 @@
 package io.github.epam.tests;
 
+import com.epam.jdi.light.ui.html.elements.common.Button;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Random;
 
 import static io.github.com.composites.AddFilterView.moreEntitiesSelector;
@@ -27,6 +30,8 @@ import static io.github.com.pages.LaunchesPage.addFilterButton;
 import static io.github.com.pages.LaunchesPage.launchesDropdown;
 
 public class LaunchesPageTest extends TestsBase {
+    private List<Button> deletedButtonsList;
+
     @BeforeMethod(alwaysRun = true)
     public void navigateToLaunchesDashboard() {
         sideBarMenu.select(LAUNCHES.getName());
@@ -56,6 +61,7 @@ public class LaunchesPageTest extends TestsBase {
         modalCancelButton.click();
         modalAddDialog.isNotVisible();
     }
+
     @Test
     public void verifyThatUserCanAddNewFilter() {
         String expectedFilterName = new Random().nextInt(1000) + "_test_filter";
@@ -67,9 +73,18 @@ public class LaunchesPageTest extends TestsBase {
         modalNewName.setValue(expectedFilterName);
         modalAddButton.click();
         sideBarMenu.select(FILTERS.getName());
+        deletedButtonsList = deleteFilter;
         filterTitle.getUIElement(expectedFilterName).assertThat().text(expectedFilterName);
-        deleteFilter.get(1).click();
-        modalDeleteDialog.shouldBe().displayed();
-        confirmDelete.click();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void cleanUp() {
+        if (deletedButtonsList != null) {
+            for (Button button : deletedButtonsList) {
+                button.click();
+                modalDeleteDialog.shouldBe().displayed();
+                confirmDelete.click();
+            }
+        }
     }
 }

@@ -1,8 +1,11 @@
 package io.github.epam.tests;
 
+import com.epam.jdi.light.ui.html.elements.common.Icon;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Random;
 
 import static io.github.com.composites.ItemDashboardView.deleteDashboard;
@@ -14,26 +17,18 @@ import static io.github.com.composites.ModalAddDialog.modalNewName;
 import static io.github.com.composites.ModalDeleteDialog.confirmDelete;
 import static io.github.com.entities.SideBarMenu.DASHBOARD;
 import static io.github.com.pages.DashboardPage.addNewDashboardButton;
-import static io.github.com.pages.DashboardPage.dashboardSearchField;
 import static io.github.com.pages.DashboardPage.dashboardTitle;
-import static io.github.com.pages.DashboardPage.noDashboardBlock;
+import static io.github.com.pages.DashboardPage.deleteDashboardIcon;
 import static io.github.com.pages.HomePage.modalAddDialog;
 import static io.github.com.pages.HomePage.modalDeleteDialog;
 import static io.github.com.pages.HomePage.sideBarMenu;
 
 public class DashboardPageTest extends TestsBase {
+    private List<Icon> deleteButtonsList;
+
     @BeforeMethod(alwaysRun = true)
     public void navigateToLaunchesDashboard() {
         sideBarMenu.select(DASHBOARD.getName());
-    }
-
-    @Test
-    public void verifyThatUserCannotSearchByDashboardNameIfNoDashboards() {
-        if (noDashboardBlock.isHidden()) {
-            dashboardSearchField.is().enabled();
-        } else {
-            dashboardSearchField.is().disabled();
-        }
     }
 
     @Test
@@ -49,6 +44,7 @@ public class DashboardPageTest extends TestsBase {
     public void verifyThatUserAddNewDashboard() {
         String expectedDashboardName = new Random().nextInt(1000) + "_test_dashboard";
         String expectedDashboardDescription = expectedDashboardName + "_description";
+        deleteButtonsList = deleteDashboardIcon;
         addNewDashboardButton.click();
         modalNewName.setValue(expectedDashboardName);
         modalDescription.setValue(expectedDashboardDescription);
@@ -57,5 +53,16 @@ public class DashboardPageTest extends TestsBase {
         deleteDashboard.click();
         modalDeleteDialog.shouldBe().displayed();
         confirmDelete.click();
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void cleanUp() {
+        if (deleteButtonsList != null) {
+            for (Icon button : deleteButtonsList) {
+                button.click();
+                modalDeleteDialog.shouldBe().displayed();
+                confirmDelete.click();
+            }
+        }
     }
 }

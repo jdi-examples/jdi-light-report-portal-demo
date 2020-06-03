@@ -4,6 +4,7 @@ import com.epam.jdi.light.elements.complex.dropdown.Dropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.JDropdown;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
+import io.github.com.composites.AddFilterView;
 
 public class LaunchesPage extends HomePage {
     @JDropdown(root = "[class*=allLatestDropdown__all-latest-dropdown]",
@@ -14,4 +15,7 @@ public class LaunchesPage extends HomePage {
 
     @UI("[class*=ghostButton__color-topaz] ['Add filter']")
     public static Button addFilterButton;
+
+    @UI("[class*=filter-controls-container]")
+    public static AddFilterView addFilterView;
 }

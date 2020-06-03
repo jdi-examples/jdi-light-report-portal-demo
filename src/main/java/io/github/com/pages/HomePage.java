@@ -19,5 +19,4 @@ public abstract class HomePage extends WebPage {
 
     @UI("[class*=modal-window]")
     public static ModalDeleteDialog modalDeleteDialog;
-
 }
