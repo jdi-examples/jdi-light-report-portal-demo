@@ -56,6 +56,7 @@ public class FiltersPageTest extends TestsBase {
         addFilterButtons.get("Add Filter").click();
         filterInputField.get(1).sendKeys("test");
         moreEntitiesSelector.select(LAUNCH_NUMBER.getName());
+        moreEntitiesSelector.is().collapsed();
         filterInputField.get(2).sendKeys("1");
         saveFilterButton.click();
         modalNewName.setValue(expectedFilterName);
