@@ -20,7 +20,7 @@ import static io.github.com.pages.DashboardPage.addNewDashboardButton;
 import static io.github.com.pages.DashboardPage.dashboardSearchField;
 import static io.github.com.pages.DashboardPage.dashboardTitle;
 import static io.github.com.pages.DashboardPage.deleteDashboardIcon;
-import static io.github.com.pages.DashboardPage.noDashboardBlock;
+import static io.github.com.pages.DashboardPage.emptyDashboardTitle;
 import static io.github.com.pages.HomePage.modalAddDialog;
 import static io.github.com.pages.HomePage.modalDeleteDialog;
 import static io.github.com.pages.HomePage.sideBarMenu;
@@ -35,8 +35,8 @@ public class DashboardPageTest extends TestsBase {
     }
 
     @Test
-    public void verifyThatUserCannotSearchByFilterNameIfNoFilters() {
-        if (noDashboardBlock.isHidden()) {
+    public void verifyThatUserCannotSearchByDashboardNameIfNoDashboards() {
+        if (emptyDashboardTitle.isHidden()) {
             dashboardSearchField.is().enabled();
         } else {
             dashboardSearchField.is().disabled();

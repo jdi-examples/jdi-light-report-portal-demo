@@ -19,8 +19,8 @@ import static io.github.com.entities.AddFilterMenu.LAUNCH_NUMBER;
 import static io.github.com.entities.SideBarMenu.FILTERS;
 import static io.github.com.pages.FiltersPage.addFilterButtons;
 import static io.github.com.pages.FiltersPage.deleteFilter;
+import static io.github.com.pages.FiltersPage.emptyFiltersTitle;
 import static io.github.com.pages.FiltersPage.filterSearchField;
-import static io.github.com.pages.FiltersPage.noFiltersBlock;
 import static io.github.com.pages.HomePage.modalAddDialog;
 import static io.github.com.pages.HomePage.modalDeleteDialog;
 import static io.github.com.pages.HomePage.sideBarMenu;
@@ -37,7 +37,7 @@ public class FiltersPageTest extends TestsBase {
 
     @Test
     public void verifyThatUserCannotSearchByFilterNameIfNoFilters() {
-        if (noFiltersBlock.isHidden()) {
+        if (emptyFiltersTitle.isHidden()) {
             filterSearchField.is().enabled();
         } else {
             filterSearchField.is().disabled();
