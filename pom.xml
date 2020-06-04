@@ -33,11 +33,15 @@
             <artifactId>testng</artifactId>
             <version>7.0.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.epam.jdi/jdi-light -->
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
             <version>1.2.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>agent-java-testng</artifactId>
+            <version>4.2.3</version>
         </dependency>
     </dependencies>
 
@@ -72,8 +76,12 @@
                     </argLine>
                     <properties>
                         <property>
-                            <name>listener</name>
+                            <name>allureListener</name>
                             <value>io.qameta.allure.testng.AllureTestNg</value>
+                        </property>
+                        <property>
+                            <name>reportportalListener</name>
+                            <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
                         </property>
                     </properties>
                 </configuration>
@@ -113,4 +121,29 @@
             </resource>
         </resources>
     </build>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-epam-reportportal</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/epam/reportportal</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <rp.endpoint>https://dev.reportportal.io</rp.endpoint>
+                <rp.launch>JDI Light Demo</rp.launch>
+                <rp.project>test-user_personal</rp.project>
+                <rp.description>local run</rp.description>
+                <rp.mode>DEBUG</rp.mode>
+                <rp.enable>true</rp.enable>
+            </properties>
+        </profile>
+    </profiles>
 </project>
