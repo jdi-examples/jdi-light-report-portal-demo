@@ -17,8 +17,10 @@ import static io.github.com.composites.ModalAddDialog.modalNewName;
 import static io.github.com.composites.ModalDeleteDialog.confirmDelete;
 import static io.github.com.entities.SideBarMenu.DASHBOARD;
 import static io.github.com.pages.DashboardPage.addNewDashboardButton;
+import static io.github.com.pages.DashboardPage.dashboardSearchField;
 import static io.github.com.pages.DashboardPage.dashboardTitle;
 import static io.github.com.pages.DashboardPage.deleteDashboardIcon;
+import static io.github.com.pages.DashboardPage.noDashboardBlock;
 import static io.github.com.pages.HomePage.modalAddDialog;
 import static io.github.com.pages.HomePage.modalDeleteDialog;
 import static io.github.com.pages.HomePage.sideBarMenu;
@@ -29,6 +31,16 @@ public class DashboardPageTest extends TestsBase {
     @BeforeMethod(alwaysRun = true)
     public void navigateToLaunchesDashboard() {
         sideBarMenu.select(DASHBOARD.getName());
+        deleteButtonsList = deleteDashboardIcon;
+    }
+
+    @Test
+    public void verifyThatUserCannotSearchByFilterNameIfNoFilters() {
+        if (noDashboardBlock.isHidden()) {
+            dashboardSearchField.is().enabled();
+        } else {
+            dashboardSearchField.is().disabled();
+        }
     }
 
     @Test
@@ -44,7 +56,6 @@ public class DashboardPageTest extends TestsBase {
     public void verifyThatUserAddNewDashboard() {
         String expectedDashboardName = new Random().nextInt(1000) + "_test_dashboard";
         String expectedDashboardDescription = expectedDashboardName + "_description";
-        deleteButtonsList = deleteDashboardIcon;
         addNewDashboardButton.click();
         modalNewName.setValue(expectedDashboardName);
         modalDescription.setValue(expectedDashboardDescription);
@@ -57,12 +68,10 @@ public class DashboardPageTest extends TestsBase {
 
     @AfterMethod(alwaysRun = true)
     public void cleanUp() {
-        if (deleteButtonsList != null) {
-            for (Icon button : deleteButtonsList) {
-                button.click();
-                modalDeleteDialog.shouldBe().displayed();
-                confirmDelete.click();
-            }
+        for (Icon button : deleteButtonsList) {
+            button.click();
+            modalDeleteDialog.shouldBe().displayed();
+            confirmDelete.click();
         }
     }
 }

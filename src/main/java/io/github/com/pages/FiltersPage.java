@@ -19,7 +19,7 @@ public class FiltersPage extends HomePage {
     public static WebList addFilterButtons;
 
     @UI("[class*=filterName__bold]")
-    public static WebList filterTitle;
+    public static WebList filterTitles;
 
     @UI("[class*=deleteFilterButton]")
     public static List<Button> deleteFilter;
