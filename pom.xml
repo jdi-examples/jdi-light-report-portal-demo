@@ -15,6 +15,10 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.1</aspectj.version>
+        <rp.endpoint>https://rp.epam.com</rp.endpoint>
+        <rp.project>epm-jdi</rp.project>
+        <rp.launch>JDI Light Demo</rp.launch>
+        <rp.enable>false</rp.enable>
     </properties>
 
     <dependencies>
@@ -33,11 +37,15 @@
             <artifactId>testng</artifactId>
             <version>7.0.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.epam.jdi/jdi-light -->
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
             <version>1.2.11</version>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>agent-java-testng</artifactId>
+            <version>4.2.3</version>
         </dependency>
     </dependencies>
 
@@ -72,8 +80,12 @@
                     </argLine>
                     <properties>
                         <property>
-                            <name>listener</name>
+                            <name>allureListener</name>
                             <value>io.qameta.allure.testng.AllureTestNg</value>
+                        </property>
+                        <property>
+                            <name>listener</name>
+                            <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
                         </property>
                     </properties>
                 </configuration>
@@ -107,10 +119,38 @@
             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
             </resource>
-            <resource>
+        </resources>
+
+        <testResources>
+            <testResource>
                 <directory>src/test/resources</directory>
                 <filtering>true</filtering>
-            </resource>
-        </resources>
+            </testResource>
+        </testResources>
     </build>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-epam-reportportal</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/epam/reportportal</url>
+        </repository>
+    </repositories>
+
+    <profiles>
+        <profile>
+            <id>rp_debug</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <rp.description>Debug light launch</rp.description>
+                <rp.mode>DEBUG</rp.mode>
+                <rp.enable>true</rp.enable>
+            </properties>
+        </profile>
+    </profiles>
 </project>
