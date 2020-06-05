@@ -6,7 +6,4 @@
             <package name="io.github.epam.tests"/>
         </packages>
     </test>
-    <listeners>
-        <listener class-name="io.github.epam.testng.TestNGListener" />
-    </listeners>
 </suite>

@@ -15,6 +15,10 @@
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
         <aspectj.version>1.9.1</aspectj.version>
+        <rp.endpoint>https://rp.epam.com</rp.endpoint>
+        <rp.project>epm-jdi</rp.project>
+        <rp.launch>JDI Light Demo</rp.launch>
+        <rp.enable>false</rp.enable>
     </properties>
 
     <dependencies>
@@ -80,7 +84,7 @@
                             <value>io.qameta.allure.testng.AllureTestNg</value>
                         </property>
                         <property>
-                            <name>reportportalListener</name>
+                            <name>listener</name>
                             <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
                         </property>
                     </properties>
@@ -115,11 +119,14 @@
             <resource>
                 <directory>${project.basedir}/src/main/resources</directory>
             </resource>
-            <resource>
+        </resources>
+
+        <testResources>
+            <testResource>
                 <directory>src/test/resources</directory>
                 <filtering>true</filtering>
-            </resource>
-        </resources>
+            </testResource>
+        </testResources>
     </build>
 
     <repositories>
@@ -135,12 +142,12 @@
 
     <profiles>
         <profile>
-            <id>dev</id>
+            <id>rp_debug</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
-                <rp.endpoint>https://dev.reportportal.io</rp.endpoint>
-                <rp.launch>JDI Light Demo</rp.launch>
-                <rp.project>test-user_personal</rp.project>
-                <rp.description>local run</rp.description>
+                <rp.description>Debug light launch</rp.description>
                 <rp.mode>DEBUG</rp.mode>
                 <rp.enable>true</rp.enable>
             </properties>
