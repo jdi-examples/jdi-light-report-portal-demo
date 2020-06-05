@@ -21,8 +21,7 @@ env:
     - TEST_USER_LOGIN="test-user"
     - TEST_USER_PASSWORD="Fqvq1s0S"
     - WITH_TESTS_PARAMS="-Dreport.portal.user=$TEST_USER_LOGIN -Dreport.portal.password=$TEST_USER_PASSWORD"
-    - REPORTPORTAL_UUID="fa1c3de7-70b2-4ccd-884a-4e6a408954da"
-    - WITH_REPORTPORTAL_PARAMS="-Drp.uuid=$REPORTPORTAL_UUID"
+
 
 stages:
   - prepare
@@ -48,7 +47,7 @@ jobs:
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS $WITH_REPORTPORTAL_PARAMS
+        - mvn verify $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS
 
     - stage: reports
       name: Deploy allure reports to netlify
