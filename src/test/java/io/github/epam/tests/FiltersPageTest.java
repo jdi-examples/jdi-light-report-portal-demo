@@ -35,6 +35,10 @@ public class FiltersPageTest extends TestsBase {
         deletedButtonsList = deleteFilter;
     }
 
+    /**
+     * This test case is unstable. Test failed on common mode but passed on debug mode.
+     * @link https://github.com/jdi-testing/jdi-light/issues/2067
+     */
     @Test
     public void verifyThatUserCannotSearchByFilterNameIfNoFilters() {
         if (emptyFiltersTitle.isHidden()) {
