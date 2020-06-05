@@ -2,21 +2,26 @@ package io.github.com;
 
 import com.epam.jdi.light.elements.pageobjects.annotations.JSite;
 import com.epam.jdi.light.elements.pageobjects.annotations.Url;
-import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import io.github.com.forms.LoginForm;
-import io.github.com.pages.HomePage;
+import io.github.com.pages.DashboardPage;
+import io.github.com.pages.DebugPage;
+import io.github.com.pages.FiltersPage;
+import io.github.com.pages.LaunchesPage;
 import io.github.com.pages.LoginPage;
-
 
 @JSite("https://dev.reportportal.io/ui")
 public class StaticSite {
-
     @Url("/#login")
     public static LoginPage loginPage;
 
-    @Url("/#")
-    public static HomePage homePage;
+    @Url("/#test-user_personal/dashboard/%s")
+    public static DashboardPage dashboardPage;
 
-    @UI("//form[contains(@class, 'loginForm')]")
-    public static LoginForm loginForm;
+    @Url("/#test-user_personal/launches/%s")
+    public static LaunchesPage launchesPage;
+
+    @Url("/#test-user_personal/filters/%s")
+    public static FiltersPage filtersPage;
+
+    @Url("/#test-user_personal/userdebug/%s")
+    public static DebugPage debugPage;
 }

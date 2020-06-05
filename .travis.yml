@@ -13,7 +13,7 @@ addons:
 
 env:
   global:
-    - CHROME_ARGS="--headless"
+    - CHROME_ARGS="--headless --start-maximized --window-size=1920,1080"
     - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
     - CHROME_PROPERTIES="chrome.properties"

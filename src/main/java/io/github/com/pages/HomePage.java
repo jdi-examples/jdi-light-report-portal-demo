@@ -1,15 +1,22 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.complex.Menu;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
-import com.epam.jdi.light.ui.html.elements.common.Button;
-import com.epam.jdi.light.ui.html.elements.common.Text;
+import io.github.com.composites.Header;
+import io.github.com.composites.ModalAddDialog;
+import io.github.com.composites.ModalDeleteDialog;
 
-public class HomePage extends WebPage {
+public abstract class HomePage extends WebPage {
+    @UI("[class*=appHeader__header]")
+    public static Header header;
 
-    @UI("//div[contains(@class, 'username')]")
-    public static Text userName;
+    @UI("[class*=sidebar__top-block]['%s']")
+    public static Menu sideBarMenu;
 
-    @UI("//div[contains(@class, 'layout__corner')]")
-    public static Button logoButton;
+    @UI("[class*=modal-window]")
+    public static ModalAddDialog modalAddDialog;
+
+    @UI("[class*=modal-window]")
+    public static ModalDeleteDialog modalDeleteDialog;
 }
