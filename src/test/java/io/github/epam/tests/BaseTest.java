@@ -6,9 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
-import static io.github.com.StaticSite.homePage;
-import static io.github.com.pages.HomePage.logoButton;
-import static io.github.com.pages.HomePage.userName;
+import static io.github.com.composites.Header.menuIcon;
+import static io.github.com.composites.Header.userName;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 import static io.github.epam.test.data.UserUtils.DEFAULT_USER;
 
@@ -17,19 +16,18 @@ public class BaseTest implements TestsInit {
     @BeforeMethod
     public void before() {
         shouldBeLoggedIn();
-        homePage.shouldBeOpened();
     }
 
     @Test
     public void baseTest() {
-        logoButton.is().notVisible();
-        userName.is().equals(DEFAULT_USER.name);
+        menuIcon.is().displayed();
+        userName.assertThat().text(DEFAULT_USER.userName.toUpperCase());
     }
 
     @Test
     public void baseTestOne() {
-        logoButton.is().visible();
-        userName.is().equals(DEFAULT_USER.name);
+        menuIcon.is().displayed();
+        userName.assertThat().text(DEFAULT_USER.userName.toUpperCase());
     }
 
     @AfterMethod
