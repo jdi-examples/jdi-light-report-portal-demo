@@ -1,9 +1,11 @@
 package io.github.epam.tests;
 
 import io.github.epam.TestsInit;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static com.epam.jdi.light.driver.WebDriverUtils.killAllSeleniumDrivers;
 import static io.github.com.StaticSite.homePage;
 import static io.github.com.pages.HomePage.logoButton;
 import static io.github.com.pages.HomePage.userName;
@@ -22,6 +24,16 @@ public class BaseTest implements TestsInit {
     public void baseTest() {
         logoButton.is().notVisible();
         userName.is().equals(DEFAULT_USER.name);
-        throw new RuntimeException();
+    }
+
+    @Test
+    public void baseTestOne() {
+        logoButton.is().visible();
+        userName.is().equals(DEFAULT_USER.name);
+    }
+
+    @AfterMethod
+    public void after() {
+        killAllSeleniumDrivers();
     }
 }
