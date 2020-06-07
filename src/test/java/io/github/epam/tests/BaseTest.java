@@ -20,7 +20,7 @@ public class BaseTest implements TestsInit {
 
     @Test
     public void baseTest() {
-        logoButton.is().displayed();
+        logoButton.is().notVisible();
         userName.is().equals(DEFAULT_USER.name);
     }
 }
