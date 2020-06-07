@@ -22,5 +22,6 @@ public class BaseTest implements TestsInit {
     public void baseTest() {
         logoButton.is().notVisible();
         userName.is().equals(DEFAULT_USER.name);
+        throw new RuntimeException();
     }
 }
