@@ -133,7 +133,6 @@ function deployAllureResults() {
     url="$(deployToNetlify "allure-report")"
     echo "LOG2"
     sendComment "$(aboutNetlify "${url}")"
-    sleep 5
     checkThatAllTestsPassed #there is an exit with exception inside
 }
 
