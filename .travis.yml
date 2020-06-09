@@ -47,7 +47,7 @@ jobs:
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS
+        - mvn verify $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS -Pdebug
 
     - stage: reports
       name: Deploy allure reports to netlify
