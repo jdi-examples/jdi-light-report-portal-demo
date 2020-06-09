@@ -142,12 +142,23 @@
 
     <profiles>
         <profile>
-            <id>rp_debug</id>
+            <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <rp.description>Debug light launch</rp.description>
+                <rp.description>Default tests launch</rp.description>
+                <rp.mode>DEFAULT</rp.mode>
+                <rp.enable>true</rp.enable>
+            </properties>
+        </profile>
+        <profile>
+            <id>debug</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <rp.description>Debug tests launch</rp.description>
                 <rp.mode>DEBUG</rp.mode>
                 <rp.enable>true</rp.enable>
             </properties>
