@@ -1,5 +1,6 @@
 package io.github.com.pages;
 
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import com.epam.jdi.light.ui.html.elements.common.Button;
 import com.epam.jdi.light.ui.html.elements.common.Icon;
@@ -16,8 +17,8 @@ public class DashboardPage extends HomePage {
     @UI("input[type='text']")
     public static TextField dashboardSearchField;
 
-    @UI("[class*=empty-dashboard-headline]")
-    public static Text emptyDashboardTitle;
+    @UI("[class*=empty-dashboards]")
+    public static Section emptyDashboardBlock;
 
     @UI("[class*=addDashboardButton] button")
     public static Button addNewDashboardButton;

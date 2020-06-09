@@ -1,6 +1,7 @@
 package io.github.com.pages;
 
 import com.epam.jdi.light.elements.complex.Menu;
+import com.epam.jdi.light.elements.composite.Section;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.elements.pageobjects.annotations.locators.UI;
 import io.github.com.composites.Header;
@@ -19,4 +20,7 @@ public abstract class HomePage extends WebPage {
 
     @UI("[class*=modal-window]")
     public static ModalDeleteDialog modalDeleteDialog;
+
+    @UI("[class*=spinner-block]")
+    public static Section spinnerBlock;
 }

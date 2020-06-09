@@ -20,10 +20,11 @@ import static io.github.com.pages.DashboardPage.addNewDashboardButton;
 import static io.github.com.pages.DashboardPage.dashboardSearchField;
 import static io.github.com.pages.DashboardPage.dashboardTitle;
 import static io.github.com.pages.DashboardPage.deleteDashboardIcon;
-import static io.github.com.pages.DashboardPage.emptyDashboardTitle;
+import static io.github.com.pages.DashboardPage.emptyDashboardBlock;
 import static io.github.com.pages.HomePage.modalAddDialog;
 import static io.github.com.pages.HomePage.modalDeleteDialog;
 import static io.github.com.pages.HomePage.sideBarMenu;
+import static io.github.com.pages.HomePage.spinnerBlock;
 
 public class DashboardPageTest extends TestsBase {
     private List<Icon> deleteButtonsList;
@@ -34,13 +35,10 @@ public class DashboardPageTest extends TestsBase {
         deleteButtonsList = deleteDashboardIcon;
     }
 
-    /**
-     * This test case is unstable. Test failed on common mode but passed on debug mode.
-     * @link https://github.com/jdi-testing/jdi-light/issues/2067
-     */
     @Test
     public void verifyThatUserCannotSearchByDashboardNameIfNoDashboards() {
-        if (emptyDashboardTitle.isHidden()) {
+        spinnerBlock.waitFor(2).disappear();
+        if (emptyDashboardBlock.isHidden()) {
             dashboardSearchField.is().enabled();
         } else {
             dashboardSearchField.is().disabled();

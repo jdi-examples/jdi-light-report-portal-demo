@@ -19,11 +19,12 @@ import static io.github.com.entities.AddFilterMenu.LAUNCH_NUMBER;
 import static io.github.com.entities.SideBarMenu.FILTERS;
 import static io.github.com.pages.FiltersPage.addFilterButtons;
 import static io.github.com.pages.FiltersPage.deleteFilter;
-import static io.github.com.pages.FiltersPage.emptyFiltersTitle;
+import static io.github.com.pages.FiltersPage.emptyFiltersBlock;
 import static io.github.com.pages.FiltersPage.filterSearchField;
 import static io.github.com.pages.HomePage.modalAddDialog;
 import static io.github.com.pages.HomePage.modalDeleteDialog;
 import static io.github.com.pages.HomePage.sideBarMenu;
+import static io.github.com.pages.HomePage.spinnerBlock;
 import static io.github.com.pages.LaunchesPage.filters;
 
 public class FiltersPageTest extends TestsBase {
@@ -35,13 +36,10 @@ public class FiltersPageTest extends TestsBase {
         deletedButtonsList = deleteFilter;
     }
 
-    /**
-     * This test case is unstable. Test failed on common mode but passed on debug mode.
-     * @link https://github.com/jdi-testing/jdi-light/issues/2067
-     */
     @Test
     public void verifyThatUserCannotSearchByFilterNameIfNoFilters() {
-        if (emptyFiltersTitle.isHidden()) {
+        spinnerBlock.waitFor(2).disappear();
+        if (emptyFiltersBlock.isHidden()) {
             filterSearchField.is().enabled();
         } else {
             filterSearchField.is().disabled();
