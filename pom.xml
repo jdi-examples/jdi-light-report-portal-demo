@@ -50,7 +50,12 @@
         <dependency>
             <groupId>com.epam.reportportal</groupId>
             <artifactId>logger-java-log4j</artifactId>
-            <version>4.0.1</version>
+            <version>5.0.0-RC-2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.28</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -154,10 +159,10 @@
         <profile>
             <id>default</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <rp.description>Default tests launch</rp.description>
+                <rp.description>JDI Light Tests Launch</rp.description>
                 <rp.mode>DEFAULT</rp.mode>
                 <rp.enable>true</rp.enable>
             </properties>
@@ -168,7 +173,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <rp.description>Debug tests launch</rp.description>
+                <rp.description>Debug - JDI Light Tests Launch</rp.description>
                 <rp.mode>DEBUG</rp.mode>
                 <rp.enable>true</rp.enable>
             </properties>

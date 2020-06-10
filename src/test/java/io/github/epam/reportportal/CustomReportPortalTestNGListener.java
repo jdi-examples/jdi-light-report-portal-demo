@@ -1,15 +1,15 @@
 package io.github.epam.reportportal;
 
 import com.epam.reportportal.testng.ReportPortalTestNGListener;
-    import org.apache.logging.log4j.LogManager;
-    import org.apache.logging.log4j.Logger;
-    import org.openqa.selenium.TakesScreenshot;
-    import org.testng.ITestResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.TakesScreenshot;
+import org.testng.ITestResult;
 
-    import java.io.File;
+import java.io.File;
 
-    import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
-    import static org.openqa.selenium.OutputType.FILE;
+import static com.epam.jdi.light.driver.WebDriverFactory.getDriver;
+import static org.openqa.selenium.OutputType.FILE;
 
 public class CustomReportPortalTestNGListener extends ReportPortalTestNGListener {
 
