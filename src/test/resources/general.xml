@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
         <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JDI-Light Reportportal Tests" parallel="methods" thread-count="1">
+<suite name="JDI-Light Report Portal Tests" parallel="methods" thread-count="1">
     <listeners>
         <listener class-name="io.github.epam.testng.TestNGListener" />
     </listeners>

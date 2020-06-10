@@ -47,6 +47,21 @@
             <artifactId>agent-java-testng</artifactId>
             <version>5.0.0-RC-2</version>
         </dependency>
+        <dependency>
+            <groupId>com.epam.reportportal</groupId>
+            <artifactId>logger-java-log4j</artifactId>
+            <version>5.0.0-RC-2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.28</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.12.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -85,7 +100,7 @@
                         </property>
                         <property>
                             <name>listener</name>
-                            <value>com.epam.reportportal.testng.ReportPortalTestNGListener</value>
+                            <value>io.github.epam.reportportal.CustomReportPortalTestNGListener</value>
                         </property>
                     </properties>
                 </configuration>
@@ -144,10 +159,10 @@
         <profile>
             <id>default</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <rp.description>Default tests launch</rp.description>
+                <rp.description>JDI Light Tests Launch</rp.description>
                 <rp.mode>DEFAULT</rp.mode>
                 <rp.enable>true</rp.enable>
             </properties>
@@ -158,7 +173,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <rp.description>Debug tests launch</rp.description>
+                <rp.description>Debug - JDI Light Tests Launch</rp.description>
                 <rp.mode>DEBUG</rp.mode>
                 <rp.enable>true</rp.enable>
             </properties>
