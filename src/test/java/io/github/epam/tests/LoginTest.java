@@ -7,7 +7,7 @@ import static io.github.com.composites.Header.userName;
 import static io.github.epam.test.data.UserUtils.DEFAULT_USER;
 
 public class LoginTest extends TestsBase {
-    @Test(testName = "User login verification")
+    @Test
     public void verifyThatUserCanLogonAsDefaultUser() {
         menuIcon.is().displayed();
         userName.assertThat().text(DEFAULT_USER.userName.toUpperCase());
