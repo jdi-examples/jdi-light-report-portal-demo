@@ -57,6 +57,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static com.epam.reportportal.testng.util.ItemTreeUtils.createKey;
+import static io.github.epam.reportportal.ReportPortalUtils.camelCaseToSentence;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toList;
 import static rp.com.google.common.base.Strings.isNullOrEmpty;
@@ -280,7 +281,7 @@ public class CustomTestNGService implements ITestNGService {
      */
     protected StartTestItemRQ buildStartConfigurationRq(ITestResult testResult, TestMethodType type) {
         StartTestItemRQ rq = new StartTestItemRQ();
-        rq.setName(testResult.getMethod().getMethodName());
+        rq.setName(camelCaseToSentence(testResult.getMethod().getMethodName()));
         rq.setCodeRef(testResult.getMethod().getQualifiedName());
         rq.setDescription(testResult.getMethod().getDescription());
         rq.setStartTime(new Date(testResult.getStartMillis()));
@@ -722,15 +723,7 @@ public class CustomTestNGService implements ITestNGService {
      * @return Test/Step Name being sent to ReportPortal
      */
     protected String createStepName(ITestResult testResult) {
-        String testName  = testResult.getMethod().getMethodName().replaceAll(
-            String.format("%s|%s|%s",
-                "(?<=[A-Z])(?=[A-Z][a-z])",
-                "(?<=[^A-Z])(?=[A-Z])",
-                "(?<=[A-Za-z])(?=[^A-Za-z])"
-            ),
-            " "
-        ).toLowerCase();
-        return testName.substring(0,1).toUpperCase() + testName.substring(1).toLowerCase();
+        return camelCaseToSentence(testResult.getMethod().getMethodName());
     }
 
     /**
