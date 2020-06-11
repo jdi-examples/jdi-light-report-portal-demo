@@ -11,18 +11,21 @@ import java.util.regex.Pattern;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 
 @Plugin(name = "LogMaskingConverter", category = "Converter")
-@ConverterKeys({"cred"})
+@ConverterKeys({"pass"})
 public class LogMaskingConverter extends LogEventPatternConverter {
-    private static final String CREDENTIALS_REGEX = ": *(?=.+[A-Za-z])(?=.+\\d)[A-Za-z\\d\\S]{3,14}";
-    private static final Pattern CREDENTIALS_PATTERN = Pattern.compile(CREDENTIALS_REGEX);
-    private static final String CREDENTIALS_REPLACEMENT_REGEX = ":****";
+    private static final String PASSWORD_REGEX = "password *: *(?=.+[A-Za-z])(?=.+\\d)[A-Za-z\\d\\S]{8,}";
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(PASSWORD_REGEX);
+    private static final String PASSWORD_REPLACEMENT_REGEX = "password:****";
+    private static final String PASS_REGEX = "pass *: *(?=.+[A-Za-z])(?=.+\\d)[A-Za-z\\d\\S]{8,}";
+    private static final Pattern PASS_PATTERN = Pattern.compile(PASS_REGEX);
+    private static final String PASS_REPLACEMENT_REGEX = "pass:****";
 
     protected LogMaskingConverter(final String name, final String style) {
         super(name, style);
     }
 
     public static LogMaskingConverter newInstance() {
-        return new LogMaskingConverter("cred", Thread.currentThread().getName());
+        return new LogMaskingConverter("pass", Thread.currentThread().getName());
     }
 
     @Override
@@ -32,7 +35,7 @@ public class LogMaskingConverter extends LogEventPatternConverter {
         try {
             maskedMessage = mask(message);
         } catch (Exception e) {
-            logger.toLog("Failed While Masking");
+            logger.toLog("Failed while masking");
             maskedMessage = message;
         }
         outputMessage.append(maskedMessage);
@@ -41,9 +44,15 @@ public class LogMaskingConverter extends LogEventPatternConverter {
     private String mask(final String message) {
         Matcher matcher;
         StringBuffer buffer = new StringBuffer();
+        String transformedMessage = message;
 
-        matcher = CREDENTIALS_PATTERN.matcher(message);
-        maskMatcher(matcher, buffer, CREDENTIALS_REPLACEMENT_REGEX);
+        matcher = PASSWORD_PATTERN.matcher(transformedMessage);
+        maskMatcher(matcher, buffer, PASSWORD_REPLACEMENT_REGEX);
+        transformedMessage = buffer.toString();
+        buffer.setLength(0);
+
+        matcher = PASS_PATTERN.matcher(transformedMessage);
+        maskMatcher(matcher, buffer, PASS_REPLACEMENT_REGEX);
 
         return buffer.toString();
     }
