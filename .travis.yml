@@ -17,7 +17,7 @@ env:
     - JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
     - PATH="$JAVA_HOME/bin:$PATH"
     - CHROME_PROPERTIES="chrome.properties"
-    - WITH_DRIVER_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES""
+    - WITH_DRIVER_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES"
     - TEST_USER_LOGIN="test-user"
     - TEST_USER_PASSWORD="Fqvq1s0S"
     - WITH_TESTS_PARAMS="-Dreport.portal.user=$TEST_USER_LOGIN -Dreport.portal.password=$TEST_USER_PASSWORD"
@@ -47,7 +47,13 @@ jobs:
       script:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./src/test/resources/$CHROME_PROPERTIES"
-        - mvn verify $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS -Pdebug
+        - >
+          mvn verify -Pdebug $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS
+          -Drp.uuid=$RP_UUID
+          -Drp.project=demoplatform
+          -Drp.enable=true
+          -Drp.endpoint=https://beta.demo.reportportal.io/
+          -Drp.attributes="env:dev-gcp;type:ui"
 
     - stage: reports
       name: Deploy allure reports to netlify
