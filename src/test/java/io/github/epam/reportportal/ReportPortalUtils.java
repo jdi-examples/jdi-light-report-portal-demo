@@ -1,8 +1,10 @@
 package io.github.epam.reportportal;
 
-class ReportPortalUtils {
+public class ReportPortalUtils {
 
-    static String camelCaseToSentence(String camelCase) {
+    private ReportPortalUtils() {}
+
+    public static String camelCaseToSentence(String camelCase) {
         String testName = camelCase.replaceAll(
             String.format("%s|%s|%s",
                 "(?<=[A-Z])(?=[A-Z][a-z])",
