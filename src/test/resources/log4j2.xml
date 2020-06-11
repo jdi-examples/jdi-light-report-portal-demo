@@ -7,7 +7,7 @@
         </Console>
         <ReportPortalLog4j2Appender name="ReportPortalAppender">
             <PatternLayout
-                    pattern="[%t] [%-5level] %logger{36} - %msg%n%throwable"/>
+                    pattern="[%t] [%-5level] %logger{36} - %pass%n%throwable"/>
         </ReportPortalLog4j2Appender>
     </Appenders>
 

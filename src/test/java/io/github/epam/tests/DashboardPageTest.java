@@ -37,7 +37,7 @@ public class DashboardPageTest extends TestsBase {
 
     @Test
     public void verifyThatUserCannotSearchByDashboardNameWithEmptyDashboards() {
-        spinnerBlock.waitFor(2).disappear();
+        spinnerBlock.waitFor().disappear();
         if (emptyDashboardBlock.isHidden()) {
             dashboardSearchField.is().enabled();
         } else {
