@@ -11,7 +11,7 @@ public abstract class TestsBase implements TestsInit {
     protected static final String TEST_USER_PERSONAL = "test-user_personal";
 
     @BeforeTest(alwaysRun = true)
-    public void before() {
+    public void logInAsTestUser() {
         shouldBeLoggedIn();
         dashboardPage.shouldBeOpened();
         projectSelector.select(TEST_USER_PERSONAL);
