@@ -92,6 +92,10 @@ public class CustomTestNGService implements ITestNGService {
 
     private static ReportPortal REPORT_PORTAL = ReportPortal.builder().build();
 
+    private static final Function<Object[], String> TRANSFORM_PARAMETERS = it -> "[" + Arrays.stream(it)
+        .map(String::valueOf)
+        .collect(Collectors.joining(",")) + "]";
+
     private final AtomicBoolean isLaunchFailed = new AtomicBoolean();
 
     private final Map<Object, Queue<Pair<Maybe<String>, FinishTestItemRQ>>> BEFORE_METHOD_TRACKER = new ConcurrentHashMap<>();
@@ -105,6 +109,7 @@ public class CustomTestNGService implements ITestNGService {
     private final GoogleAnalytics googleAnalytics = new GoogleAnalytics(Schedulers.from(googleAnalyticsExecutor), "UA-96321031-1");
     private final List<AnalyticsItem> analyticsItems = new CopyOnWriteArrayList<>();
     private final List<Completable> dependencies = new CopyOnWriteArrayList<>();
+
 
     public CustomTestNGService() {
         this.launch = new MemorizingSupplier<>(() -> {
@@ -796,10 +801,6 @@ public class CustomTestNGService implements ITestNGService {
         return isParametersPresent ? codeRef + TRANSFORM_PARAMETERS.apply(parameters) : codeRef;
     }
 
-    private static final Function<Object[], String> TRANSFORM_PARAMETERS = it -> "[" + Arrays.stream(it)
-        .map(String::valueOf)
-        .collect(Collectors.joining(",")) + "]";
-
     @Nullable
     private TestCaseIdEntry getTestCaseId(TestCaseId testCaseId, ITestResult testResult) {
         if (testCaseId.parametrized()) {
@@ -870,8 +871,8 @@ public class CustomTestNGService implements ITestNGService {
 
     @VisibleForTesting
     static class MemorizingSupplier<T> implements Supplier<T>, Serializable {
-        final Supplier<T> delegate;
-        transient volatile T value;
+        private final Supplier<T> delegate;
+        private transient volatile T value;
         private static final long serialVersionUID = 0L;
 
         MemorizingSupplier(Supplier<T> delegate) {
