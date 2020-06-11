@@ -36,7 +36,7 @@ public class DashboardPageTest extends TestsBase {
     }
 
     @Test
-    public void verifyThatUserCannotSearchByDashboardNameIfNoDashboards() {
+    public void verifyThatUserCannotSearchByDashboardNameWithEmptyDashboards() {
         spinnerBlock.waitFor().disappear();
         if (emptyDashboardBlock.isHidden()) {
             dashboardSearchField.is().enabled();
@@ -55,7 +55,7 @@ public class DashboardPageTest extends TestsBase {
     }
 
     @Test
-    public void verifyThatUserAddNewDashboard() {
+    public void verifyThatUserCanAddNewDashboard() {
         String expectedDashboardName = new Random().nextInt(1000) + "_test_dashboard";
         String expectedDashboardDescription = expectedDashboardName + "_description";
         addNewDashboardButton.click();

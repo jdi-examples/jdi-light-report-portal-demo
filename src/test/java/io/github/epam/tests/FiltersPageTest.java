@@ -37,7 +37,7 @@ public class FiltersPageTest extends TestsBase {
     }
 
     @Test
-    public void verifyThatUserCannotSearchByFilterNameIfNoFilters() {
+    public void verifyThatUserCannotSearchByFilterNameIfFiltersAreEmpty() {
         spinnerBlock.waitFor().disappear();
         if (emptyFiltersBlock.isHidden()) {
             filterSearchField.is().enabled();
