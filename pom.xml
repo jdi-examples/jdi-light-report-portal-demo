@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -94,7 +94,8 @@
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar" @{sealightsArgLine}
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        @{sealightsArgLine}
                     </argLine>
                     <properties>
                         <property>
@@ -130,6 +131,41 @@
                     <generateBackupPoms>false</generateBackupPoms>
                     <rulesUri>file://${project.basedir}/../maven-version-rules.xml</rulesUri>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.sealights.on-premise.agents.plugin</groupId>
+                <artifactId>sealights-maven-plugin</artifactId>
+                <configuration>
+                    <tokenFile>${sl.tokenFile}</tokenFile>
+                    <buildSessionId>${sl.buildSessionId}</buildSessionId>
+                    <createBuildSessionId>false</createBuildSessionId>
+                    <filesincluded>*.class</filesincluded>
+                    <testStage>JDI UI Tests</testStage>
+                    <filesexcluded>*test-classes*</filesexcluded>
+                    <logLevel>OFF</logLevel>
+                    <logFolder>/tmp</logFolder>
+                    <includeResources>true</includeResources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>a1</id>
+                        <goals>
+                            <goal>build-scanner</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>a2</id>
+                        <goals>
+                            <goal>test-listener</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>a3</id>
+                        <goals>
+                            <goal>prepare-test-listener</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
 
@@ -169,6 +205,45 @@
                 <rp.mode>DEFAULT</rp.mode>
                 <rp.enable>true</rp.enable>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.sealights.on-premise.agents.plugin</groupId>
+                        <artifactId>sealights-maven-plugin</artifactId>
+                        <configuration>
+                            <tokenFile>${sl.tokenFile}</tokenFile>
+                            <buildSessionId>${sl.buildSessionId}</buildSessionId>
+                            <createBuildSessionId>false</createBuildSessionId>
+                            <filesincluded>*.class</filesincluded>
+                            <testStage>JDI UI Tests</testStage>
+                            <filesexcluded>*test-classes*</filesexcluded>
+                            <logLevel>OFF</logLevel>
+                            <logFolder>/tmp</logFolder>
+                            <includeResources>true</includeResources>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>a1</id>
+                                <goals>
+                                    <goal>build-scanner</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>a2</id>
+                                <goals>
+                                    <goal>test-listener</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>a3</id>
+                                <goals>
+                                    <goal>prepare-test-listener</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
         <profile>
             <id>debug</id>
@@ -180,6 +255,45 @@
                 <rp.mode>DEBUG</rp.mode>
                 <rp.enable>true</rp.enable>
             </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.sealights.on-premise.agents.plugin</groupId>
+                        <artifactId>sealights-maven-plugin</artifactId>
+                        <configuration>
+                            <tokenFile>${sl.tokenFile}</tokenFile>
+                            <buildSessionId>${sl.buildSessionId}</buildSessionId>
+                            <createBuildSessionId>false</createBuildSessionId>
+                            <filesincluded>*.class</filesincluded>
+                            <testStage>JDI UI Tests</testStage>
+                            <filesexcluded>*test-classes*</filesexcluded>
+                            <logLevel>OFF</logLevel>
+                            <logFolder>/tmp</logFolder>
+                            <includeResources>true</includeResources>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>a1</id>
+                                <goals>
+                                    <goal>build-scanner</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>a2</id>
+                                <goals>
+                                    <goal>test-listener</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>a3</id>
+                                <goals>
+                                    <goal>prepare-test-listener</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 </project>
