@@ -131,15 +131,6 @@
                     <rulesUri>file://${project.basedir}/../maven-version-rules.xml</rulesUri>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>io.sealights.on-premise.agents.plugin</groupId>
-                <artifactId>sealights-maven-plugin</artifactId>
-                <version>2.1.687</version>
-                <configuration>
-                    <appName>JdiLightReportPortalDemoPlatform</appName>
-                </configuration>
-            </plugin>
         </plugins>
 
         <resources>
