@@ -15,18 +15,16 @@ import static io.github.epam.states.States.shouldBeLoggedIn;
 
 @SuppressWarnings("all")
 public abstract class GenRocketTestsBase implements TestsInit {
-    protected static final String TEST_USER_PERSONAL = "test-user_personal";
 
     @BeforeSuite
     public void beforeSuite() throws IOException {
         GenRocketUtils.invokeDataScenario(USER_PAYLOAD);
-        UserUtils.DEFAULT_USER = UserUtils.getUsers().stream().findFirst().get();
+        UserUtils.DEFAULT_USER = UserUtils.getUsers(USER_PAYLOAD).stream().findFirst().get();
     }
 
     @BeforeTest(alwaysRun = true)
     public void logInAsTestUser() {
         shouldBeLoggedIn();
         dashboardPage.shouldBeOpened();
-        projectSelector.select(TEST_USER_PERSONAL);
     }
 }

@@ -1,5 +1,6 @@
 package io.github.com.util;
 
+import io.github.com.entities.GenRocketPayload;
 import io.github.com.entities.User;
 import io.minio.BucketExistsArgs;
 import io.minio.GetObjectArgs;
@@ -11,7 +12,6 @@ import java.util.List;
 
 public class UserUtils {
     public static User DEFAULT_USER = new User();
-    private static final String USER_FILE = "users.json";
     private static final String GENROCKET_BUCKET = "genrocket";
     private static  MinioClient minioClient;
 
@@ -22,12 +22,16 @@ public class UserUtils {
                 .build();
     }
 
-    public static List<User> getUsers() {
+    public static List<User> getUsers(GenRocketPayload payload) {
         try {
             boolean isExist =
                     minioClient.bucketExists(BucketExistsArgs.builder().bucket(GENROCKET_BUCKET).build());
             if (isExist) {
-                InputStream object = minioClient.getObject(GetObjectArgs.builder().bucket(GENROCKET_BUCKET).object(USER_FILE).build());
+                InputStream object = minioClient.getObject(GetObjectArgs.builder()
+                        .bucket(GENROCKET_BUCKET)
+                        .object(payload.getOutFile())
+                        .build()
+                );
                 return JsonUtils.getObject(object, User.class);
             }
         } catch (Throwable e) {

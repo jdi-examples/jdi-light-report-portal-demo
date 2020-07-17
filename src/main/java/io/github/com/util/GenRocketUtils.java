@@ -13,7 +13,7 @@ import static com.epam.jdi.light.settings.WebSettings.logger;
 
 public class GenRocketUtils {
     private static final String DATA_FOLDER = "gen-data";
-    private static final String GEN_ROCKET_API = "https://dev.reportportal.io/genrocket/grRest"; //TODO update tu k8s
+    private static final String GEN_ROCKET_API = "https://dev.reportportal.io/genrocket/grRest";
 
     private GenRocketUtils(){}
 
