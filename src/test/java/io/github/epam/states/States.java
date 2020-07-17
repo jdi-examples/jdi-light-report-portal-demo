@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 import static com.epam.jdi.light.elements.composite.WebPage.openUrl;
 import static com.epam.jdi.light.settings.JDISettings.DRIVER;
 import static io.github.com.StaticSite.loginPage;
-import static io.github.epam.test.data.UserUtils.DEFAULT_USER;
+import static io.github.com.util.UserUtils.DEFAULT_USER;
 
 public class States {
     @Step
