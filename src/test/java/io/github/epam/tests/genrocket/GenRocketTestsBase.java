@@ -9,7 +9,6 @@ import org.testng.annotations.BeforeTest;
 import java.io.IOException;
 
 import static io.github.com.StaticSite.dashboardPage;
-import static io.github.com.composites.Header.projectSelector;
 import static io.github.com.entities.GenRocketPayload.USER_PAYLOAD;
 import static io.github.epam.states.States.shouldBeLoggedIn;
 

@@ -4,10 +4,11 @@ import com.epam.jdi.light.logger.LogLevels;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.sun.xml.internal.ws.encoding.soap.DeserializationException;
+import org.jsoup.SerializationException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.List;
 
 import static com.epam.jdi.light.settings.WebSettings.logger;
@@ -25,7 +26,7 @@ public class JsonUtils {
             return objectMapper.readValue(json, collectionType);
         } catch (IOException e) {
             logger.toLog(e.getMessage(), LogLevels.ERROR);
-            throw new RuntimeException(e.getMessage());
+            throw new DeserializationException(e.getMessage());
         }
     }
 }

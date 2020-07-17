@@ -1,5 +1,6 @@
 package io.github.com.util;
 
+import com.epam.jdi.light.logger.LogLevels;
 import io.github.com.entities.GenRocketPayload;
 import io.github.com.entities.User;
 import io.minio.BucketExistsArgs;
@@ -10,24 +11,18 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
+
 public class UserUtils {
     public static User DEFAULT_USER = new User();
     private static final String GENROCKET_BUCKET = "genrocket";
-    private static  MinioClient minioClient;
-
-    private UserUtils (){
-        minioClient = new MinioClient.Builder()
-                .endpoint(System.getProperty("minio.url"))
-                .credentials(System.getProperty("minio.accesskey"), System.getProperty("minio.secretkey"))
-                .build();
-    }
 
     public static List<User> getUsers(GenRocketPayload payload) {
         try {
             boolean isExist =
-                    minioClient.bucketExists(BucketExistsArgs.builder().bucket(GENROCKET_BUCKET).build());
+                    Minio.getInstance().minioClient.bucketExists(BucketExistsArgs.builder().bucket(GENROCKET_BUCKET).build());
             if (isExist) {
-                InputStream object = minioClient.getObject(GetObjectArgs.builder()
+                InputStream object = Minio.getInstance().minioClient.getObject(GetObjectArgs.builder()
                         .bucket(GENROCKET_BUCKET)
                         .object(payload.getOutFile())
                         .build()
@@ -35,7 +30,7 @@ public class UserUtils {
                 return JsonUtils.getObject(object, User.class);
             }
         } catch (Throwable e) {
-            throw new RuntimeException(e.getMessage());
+            logger.toLog(e.getMessage(), LogLevels.ERROR);
         }
         return Collections.emptyList();
     }

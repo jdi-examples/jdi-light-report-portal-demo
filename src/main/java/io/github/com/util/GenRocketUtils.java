@@ -26,7 +26,6 @@ public class GenRocketUtils {
             assert execute.returnResponse().getStatusLine().getStatusCode() == 200 : payloadScenario.getError();
         } catch (IOException e) {
             logger.toLog(e.getMessage(), LogLevels.ERROR);
-            throw new RuntimeException(e.getMessage());
         }
     }
 }
