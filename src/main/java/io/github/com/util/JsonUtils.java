@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.sun.xml.internal.ws.encoding.soap.DeserializationException;
-import org.jsoup.SerializationException;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -5,7 +5,6 @@ import io.github.com.entities.GenRocketPayload;
 import io.github.com.entities.User;
 import io.minio.BucketExistsArgs;
 import io.minio.GetObjectArgs;
-import io.minio.MinioClient;
 
 import java.io.InputStream;
 import java.util.Collections;
