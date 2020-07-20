@@ -18,10 +18,15 @@ public class UserUtils {
 
     public static List<User> getUsers(GenRocketPayload payload) {
         try {
-            boolean isExist =
-                    Minio.getInstance().minioClient.bucketExists(BucketExistsArgs.builder().bucket(GENROCKET_BUCKET).build());
+            boolean isExist = Minio.getInstance()
+                    .minioClient
+                    .bucketExists(BucketExistsArgs.builder().bucket(GENROCKET_BUCKET).build());
+
+            logger.toLog(String.format("The %s has the following state %s", GENROCKET_BUCKET, isExist), LogLevels.INFO);
+
             if (isExist) {
-                InputStream object = Minio.getInstance().minioClient.getObject(GetObjectArgs.builder()
+                InputStream object = Minio.getInstance()
+                        .minioClient.getObject(GetObjectArgs.builder()
                         .bucket(GENROCKET_BUCKET)
                         .object(payload.getOutFile())
                         .build()
