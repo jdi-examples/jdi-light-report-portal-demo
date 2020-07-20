@@ -15,7 +15,7 @@ public class Minio {
 
     public static Minio getInstance() {
         if (INSTANCE == null) {
-            return new Minio();
+            return INSTANCE = new Minio();
         }
         return INSTANCE;
     }
