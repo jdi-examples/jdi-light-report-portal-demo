@@ -21,6 +21,9 @@ public class UserUtils {
             boolean isExist = Minio.getInstance()
                     .minioClient
                     .bucketExists(BucketExistsArgs.builder().bucket(GENROCKET_BUCKET).build());
+
+            logger.toLog(String.format("The %s has the following state %s", GENROCKET_BUCKET, isExist), LogLevels.INFO);
+
             if (isExist) {
                 InputStream object = Minio.getInstance()
                         .minioClient.getObject(GetObjectArgs.builder()
