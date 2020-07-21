@@ -18,9 +18,7 @@ env:
     - PATH="$JAVA_HOME/bin:$PATH"
     - CHROME_PROPERTIES="chrome.properties"
     - WITH_DRIVER_PARAMS="-Ddriver=chrome -Dchrome.capabilities.path=$CHROME_PROPERTIES"
-    - TEST_USER_LOGIN="test-user"
-    - TEST_USER_PASSWORD="Fqvq1s0S"
-    - WITH_TESTS_PARAMS="-Dreport.portal.user=$TEST_USER_LOGIN -Dreport.portal.password=$TEST_USER_PASSWORD"
+    - WITH_TESTS_PARAMS="-Dreport.portal.user=$SUT_LOGIN -Dreport.portal.password=$SUT_PASSWORD"
 
 
 stages:
