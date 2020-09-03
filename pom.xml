@@ -14,7 +14,7 @@
         <allure.testng>2.13.1</allure.testng>
         <allure.maven>2.10.0</allure.maven>
         <jetty.version>9.4.12.RC2</jetty.version>
-        <aspectj.version>1.9.5</aspectj.version>
+        <aspectj.version>1.9.6</aspectj.version>
         <rp.endpoint>https://rp.epam.com</rp.endpoint>
         <rp.project>epm-jdi</rp.project>
         <rp.launch>JDI Light Demo</rp.launch>
@@ -45,12 +45,12 @@
         <dependency>
             <groupId>com.epam.jdi</groupId>
             <artifactId>jdi-light-html</artifactId>
-            <version>1.2.15</version>
+            <version>1.2.18</version>
         </dependency>
         <dependency>
             <groupId>com.epam.reportportal</groupId>
             <artifactId>agent-java-testng</artifactId>
-            <version>5.0.1</version>
+            <version>5.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.epam.reportportal</groupId>
