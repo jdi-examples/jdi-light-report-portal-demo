@@ -62,9 +62,9 @@ public class DashboardPageTest extends TestsBase {
         modalNewName.setValue(expectedDashboardName);
         modalDescription.setValue(expectedDashboardDescription);
         modalAddButton.click();
-        dashboardTitle.assertThat().text(expectedDashboardName.toUpperCase());
+        dashboardTitle.assertThat().text(expectedDashboardName.toLowerCase());
         deleteDashboard.click();
-        modalDeleteDialog.shouldBe().displayed();
+        modalDeleteDialog.shouldBe().disabled();
         confirmDelete.click();
     }
 
