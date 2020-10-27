@@ -12,11 +12,13 @@ import static java.lang.System.getProperty;
 
 public interface TestsInit {
 
+    String DEV_ENV = "https://dev.reportportal.io/ui";
+
     static void setRemoteWebDriverIfRequired() {
         String remoteUrl = getProperty("webdriver.remote.url");
         if (remoteUrl != null) {
             JDISettings.DRIVER.remoteUrl = remoteUrl;
-            JDISettings.DRIVER.domain = System.getProperty("env");
+            JDISettings.DRIVER.domain = System.getProperty("env", DEV_ENV);
             JDISettings.DRIVER.remoteRun = true;
             JDISettings.DRIVER.capabilities.chrome.put("w3c", "true");
             JDISettings.DRIVER.capabilities.chrome.put("platformName", "Linux");
