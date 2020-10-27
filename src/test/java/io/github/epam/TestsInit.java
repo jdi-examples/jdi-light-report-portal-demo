@@ -1,6 +1,7 @@
 package io.github.epam;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.settings.JDISettings;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
@@ -12,11 +13,12 @@ import static java.lang.System.getProperty;
 
 public interface TestsInit {
 
+    String DEV_ENV = "https://dev.reportportal.io/ui";
+
     static void setRemoteWebDriverIfRequired() {
         String remoteUrl = getProperty("webdriver.remote.url");
         if (remoteUrl != null) {
             JDISettings.DRIVER.remoteUrl = remoteUrl;
-            JDISettings.DRIVER.domain = System.getProperty("env");
             JDISettings.DRIVER.remoteRun = true;
             JDISettings.DRIVER.capabilities.chrome.put("w3c", "true");
             JDISettings.DRIVER.capabilities.chrome.put("platformName", "Linux");
@@ -30,8 +32,9 @@ public interface TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
+        JDISettings.DRIVER.domain = System.getProperty("env", DEV_ENV);
         setRemoteWebDriverIfRequired();
-        openSite(StaticSite.class);
+        WebPage.openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
 
