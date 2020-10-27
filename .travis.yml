@@ -52,6 +52,8 @@ jobs:
           -Drp.enable=true
           -Drp.endpoint=https://beta.demo.reportportal.io/
           -Drp.attributes="env:dev-gcp;type:ui"
+          -P dev
+
 
     - stage: reports
       name: Deploy allure reports to netlify

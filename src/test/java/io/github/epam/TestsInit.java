@@ -16,6 +16,7 @@ public interface TestsInit {
         String remoteUrl = getProperty("webdriver.remote.url");
         if (remoteUrl != null) {
             JDISettings.DRIVER.remoteUrl = remoteUrl;
+            JDISettings.DRIVER.domain = System.getProperty("env");
             JDISettings.DRIVER.remoteRun = true;
             JDISettings.DRIVER.capabilities.chrome.put("w3c", "true");
             JDISettings.DRIVER.capabilities.chrome.put("platformName", "Linux");
