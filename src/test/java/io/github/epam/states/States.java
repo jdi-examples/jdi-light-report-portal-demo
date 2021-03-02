@@ -21,7 +21,7 @@ public class States {
         if (!url.contains(DRIVER.domain) || url.contains("issue")) {
             openUrl(DRIVER.domain);
         }
-        loginPage.open();
+        loginPage.shouldBeOpened();
         login(user);
     }
 
