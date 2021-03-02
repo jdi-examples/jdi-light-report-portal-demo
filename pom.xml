@@ -180,6 +180,9 @@
             <properties>
                 <sut.env>https://dev.fleetframework.io/ui</sut.env>
             </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
         <profile>
             <id>qa</id>
