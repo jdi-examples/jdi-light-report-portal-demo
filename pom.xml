@@ -178,13 +178,13 @@
         <profile>
             <id>dev</id>
             <properties>
-                <sut.env>https://dev.reportportal.io/ui</sut.env>
+                <sut.env>https://dev.fleetframework.io/ui</sut.env>
             </properties>
         </profile>
         <profile>
             <id>qa</id>
             <properties>
-                <sut.env>http://35.202.106.226/ui</sut.env>
+                <sut.env>http://qa.fleetframework.io/ui</sut.env>
             </properties>
         </profile>
         <profile>

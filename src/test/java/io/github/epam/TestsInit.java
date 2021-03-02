@@ -13,7 +13,7 @@ import static java.lang.System.getProperty;
 
 public interface TestsInit {
 
-    String DEV_ENV = "https://dev.reportportal.io/ui";
+    String DEV_ENV = "https://dev.fleetframework.io/ui";
 
     static void setRemoteWebDriverIfRequired() {
         String remoteUrl = getProperty("webdriver.remote.url");
