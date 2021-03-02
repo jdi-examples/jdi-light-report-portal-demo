@@ -8,6 +8,7 @@ import io.github.com.pages.FiltersPage;
 import io.github.com.pages.LaunchesPage;
 import io.github.com.pages.LoginPage;
 
+@JSite("https://dev.reportportal.io/ui")
 public class StaticSite {
     @Url("/#login")
     public static LoginPage loginPage;
