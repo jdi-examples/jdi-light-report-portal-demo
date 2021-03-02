@@ -1,12 +1,13 @@
 package io.github.epam;
 
 import com.epam.jdi.light.driver.WebDriverFactory;
+import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.settings.JDISettings;
+import com.epam.jdi.tools.PropertyReader;
 import io.github.com.StaticSite;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
-import static com.epam.jdi.light.elements.composite.WebPage.openSite;
 import static com.epam.jdi.light.settings.WebSettings.logger;
 import static java.lang.System.getProperty;
 
@@ -29,8 +30,9 @@ public interface TestsInit {
 
     @BeforeSuite(alwaysRun = true)
     static void setUp() {
+        JDISettings.DRIVER.domain = PropertyReader.getProperties("test.properties").getProperty("domain");
         setRemoteWebDriverIfRequired();
-        openSite(StaticSite.class);
+        WebPage.openSite(StaticSite.class);
         logger.toLog("Run Tests");
     }
 

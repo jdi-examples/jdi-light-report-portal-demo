@@ -46,12 +46,13 @@ jobs:
         - mvn -ntp install -DskipTests
         - echo arguments=$CHROME_ARGS > "./src/test/resources/$CHROME_PROPERTIES"
         - >
-          mvn verify -Dtest=!GenRocketLoginTest -Pdebug $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS
+          mvn verify -Dtest=!GenRocketLoginTest -Pdebug,dev $WITH_DRIVER_PARAMS $WITH_TESTS_PARAMS
           -Drp.uuid=$RP_UUID
           -Drp.project=demoplatform
           -Drp.enable=true
           -Drp.endpoint=https://beta.demo.reportportal.io/
           -Drp.attributes="env:dev-gcp;type:ui"
+
 
     - stage: reports
       name: Deploy allure reports to netlify

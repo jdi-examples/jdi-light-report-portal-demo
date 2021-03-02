@@ -18,8 +18,7 @@ public class GenRocketUtils {
     private GenRocketUtils(){}
 
     public static void invokeDataScenario(GenRocketPayload payloadScenario){
-        try {
-            InputStream payload = ClassLoader.getSystemResourceAsStream(DATA_FOLDER + payloadScenario.getName());
+        try(InputStream payload = ClassLoader.getSystemResourceAsStream(DATA_FOLDER + payloadScenario.getName())) {
             Response execute = Request.Post(GEN_ROCKET_API)
                     .bodyStream(payload, ContentType.APPLICATION_JSON)
                     .execute();
