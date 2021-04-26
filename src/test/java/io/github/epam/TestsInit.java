@@ -30,7 +30,7 @@ public interface TestsInit {
             addTestProperty("driver.remote.url", remoteUrl);
             JDISettings.DRIVER.capabilities.chrome.put("w3c", "true");
             JDISettings.DRIVER.capabilities.chrome.put("platformName",
-                    ObjectUtils.defaultIfNull(getProperty("webdriver.platform.name"), "Linux"));
+                    ObjectUtils.defaultIfNull(getProperty("webdriver.platform.name"), "Windows"));
             JDISettings.DRIVER.capabilities.chrome.put("browserVersion", "latest");
             String buildTag = getProperty("build.tag");
             if (buildTag != null) {
