@@ -50,7 +50,7 @@ jobs:
           -Drp.uuid=$RP_UUID
           -Drp.project=demoplatform
           -Drp.enable=true
-          -Drp.endpoint=https://reportportal.epam.com/
+          -Drp.endpoint=https://dev.fleetframework.io/
           -Drp.attributes="env:dev-gcp;type:ui"
 
 
