@@ -7,6 +7,7 @@ import static io.github.com.composites.Header.userName;
 import static io.github.com.util.UserUtils.DEFAULT_USER;
 
 public class LoginTest extends TestsBase {
+
     @Test
     public void verifyThatUserCanLogonAsDefaultUser() {
         menuIcon.is().displayed();
