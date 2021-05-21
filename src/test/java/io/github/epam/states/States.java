@@ -27,7 +27,9 @@ public class States {
 
     @Step
     private static void login(User user) {
+        loginPage.loginForm.waitFor().is().displayed();
         loginPage.loginForm.loginAs(user);
+        loginPage.loginForm.waitFor().disappear();
     }
 
 }
