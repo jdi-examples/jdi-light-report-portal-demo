@@ -31,7 +31,8 @@ public interface TestsInit {
             JDISettings.DRIVER.capabilities.chrome.put("w3c", "true");
             JDISettings.DRIVER.capabilities.chrome.put("platformName",
                     ObjectUtils.defaultIfNull(getProperty("webdriver.platform.name"), "Windows"));
-            JDISettings.DRIVER.capabilities.chrome.put("browserVersion", "latest");
+            JDISettings.DRIVER.capabilities.chrome.put("browserVersion",
+                    ObjectUtils.defaultIfNull(getProperty("webdriver.version"), "latest"));
             String buildTag = getProperty("build.tag");
             if (buildTag != null) {
                 JDISettings.DRIVER.capabilities.chrome.put("build", "build: " + buildTag);
