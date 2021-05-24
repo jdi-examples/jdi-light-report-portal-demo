@@ -24,7 +24,7 @@
         <sealightsArgLine></sealightsArgLine>
         <sl.tokenFile></sl.tokenFile>
         <sl.buildSessionId></sl.buildSessionId>
-        <sut.env>https://dev.fleetframework.io/ui</sut.env>
+        <sut.env>https://dev.fleetframework.io/</sut.env>
     </properties>
 
     <dependencies>
@@ -181,7 +181,7 @@
         <profile>
             <id>dev</id>
             <properties>
-                <sut.env>https://dev.fleetframework.io/ui</sut.env>
+                <sut.env>https://dev.fleetframework.io/</sut.env>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -190,7 +190,7 @@
         <profile>
             <id>qa</id>
             <properties>
-                <sut.env>http://qa.fleetframework.io/ui</sut.env>
+                <sut.env>http://qa.fleetframework.io/</sut.env>
             </properties>
         </profile>
         <profile>

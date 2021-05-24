@@ -7,15 +7,15 @@ public class StaticSite {
     @Url("/#login")
     public static LoginPage loginPage;
 
-    @Url("/#test-user_personal/dashboard/%s")
+    @Url("/#test-user_personal/dashboard/")
     public static DashboardPage dashboardPage;
 
-    @Url("/#test-user_personal/launches/%s")
+    @Url("/#test-user_personal/launches/")
     public static LaunchesPage launchesPage;
 
-    @Url("/#test-user_personal/filters/%s")
+    @Url("/#test-user_personal/filters/")
     public static FiltersPage filtersPage;
 
-    @Url("/#test-user_personal/userdebug/%s")
+    @Url("/#test-user_personal/userdebug/")
     public static DebugPage debugPage;
 }
