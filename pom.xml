@@ -190,7 +190,7 @@
         <profile>
             <id>qa</id>
             <properties>
-                <sut.env>http://qa.fleetframework.io/</sut.env>
+                <sut.env>https://uat.fleetframework.io/</sut.env>
             </properties>
         </profile>
         <profile>
