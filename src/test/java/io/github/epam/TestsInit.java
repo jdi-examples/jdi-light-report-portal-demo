@@ -1,5 +1,16 @@
 package io.github.epam;
 
+import static com.epam.jdi.light.settings.WebSettings.logger;
+import static java.lang.System.getProperty;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import com.epam.jdi.light.driver.WebDriverFactory;
 import com.epam.jdi.light.elements.composite.WebPage;
 import com.epam.jdi.light.settings.JDISettings;
@@ -11,15 +22,6 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.lang3.ObjectUtils;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Objects;
-
-import static com.epam.jdi.light.settings.WebSettings.logger;
-import static java.lang.System.getProperty;
 
 public interface TestsInit {
 
@@ -37,6 +39,19 @@ public interface TestsInit {
             if (buildTag != null) {
                 JDISettings.DRIVER.capabilities.chrome.put("build", "build: " + buildTag);
             }
+
+            // pass additional capabilities in form
+            // -Dwebdriver.capabilities=browserName:xxx,browserVersion:yyy
+            String additionalCapsStr = getProperty("webdriver.capabilities");
+            Optional.ofNullable(additionalCapsStr).ifPresent(capsStr -> {
+                final String[] caps = capsStr.split(",");
+                Stream.of(caps).forEach(cap -> {
+                    final String[] capParts = cap.split(":", 2);
+                    if (capParts.length == 2) {
+                        JDISettings.DRIVER.capabilities.chrome.put(capParts[0], capParts[1]);
+                    }
+                });
+            });
         }
     }
 
